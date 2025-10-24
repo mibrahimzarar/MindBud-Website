@@ -670,7 +670,7 @@ body {
 
 /* Products Section */
 .products {
-    padding: 6rem 0;
+    padding: 1rem 0;
     background: #0f172a;
     overflow: hidden;
 }
@@ -805,10 +805,10 @@ body {
     border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Modern Logo Container - Redesigned from scratch */
+/* Modern Logo Container - Clean and Simple */
 .product-image {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 110px;
     margin: 0 auto 3rem;
     position: relative;
     display: flex;
@@ -818,69 +818,10 @@ body {
     cursor: pointer;
 }
 
-/* Outer Ring - Subtle gradient border */
-.product-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 3px;
-    background: linear-gradient(135deg, 
-        rgba(96, 165, 250, 0.4) 0%,
-        rgba(167, 139, 250, 0.3) 25%,
-        rgba(34, 197, 94, 0.3) 50%,
-        rgba(251, 191, 36, 0.3) 75%,
-        rgba(239, 68, 68, 0.4) 100%
-    );
-    border-radius: 50%;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask-composite: xor;
-    opacity: 0;
-    transition: all 0.6s ease;
-    animation: rotate-gradient 12s linear infinite;
-}
-
-/* Inner Container - Clean glass morphism */
-.product-image::after {
-    content: '';
-    position: absolute;
-    inset: 8px;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.12) 0%,
-        rgba(255, 255, 255, 0.06) 100%
-    );
-    border-radius: 50%;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.5s ease;
-}
-
-@keyframes rotate-gradient {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Pulse animation for attention */
-@keyframes pulse-glow {
-    0%, 100% { 
-        box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.12),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-    50% { 
-        box-shadow: 
-            0 12px 40px rgba(96, 165, 250, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    }
-}
-
 /* Logo Image - Clean and centered */
 .logo-img {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
     border-radius: 50%;
     position: relative;
@@ -892,24 +833,6 @@ body {
 /* Enhanced Hover Effects */
 .product-card:hover .product-image {
     transform: translateY(-8px) scale(1.02);
-}
-
-.product-card:hover .product-image::before {
-    opacity: 1;
-    transform: scale(1.05);
-    animation-duration: 8s;
-}
-
-.product-card:hover .product-image::after {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.18) 0%,
-        rgba(255, 255, 255, 0.08) 100%
-    );
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 
-        0 16px 48px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .product-card:hover .logo-img {
@@ -1221,7 +1144,7 @@ body {
 
 .contact-item h4 {
     margin-bottom: 0.25rem;
-    color: #333;
+    color: #ececec;
 }
 
 .contact-item p {
@@ -1868,27 +1791,14 @@ body {
 
     /* Modern Logo Container - Mobile Responsive */
     .product-image {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 110px;
         margin: 0 auto 2rem;
     }
 
-    .product-image::before {
-        padding: 2px;
-        animation-duration: 15s;
-    }
-
-    .product-image::after {
-        inset: 6px;
-        backdrop-filter: blur(15px);
-        box-shadow: 
-            0 6px 24px rgba(0, 0, 0, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
     .logo-img {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
     }
 
@@ -2002,27 +1912,14 @@ body {
 
     /* Modern Logo Container - Small Mobile Responsive */
     .product-image {
-        width: 110px;
-        height: 110px;
+        width: 130px;
+        height: 130px;
         margin: 0 auto 1.5rem;
     }
 
-    .product-image::before {
-        padding: 2px;
-        animation-duration: 18s;
-    }
-
-    .product-image::after {
-        inset: 5px;
-        backdrop-filter: blur(12px);
-        box-shadow: 
-            0 4px 20px rgba(0, 0, 0, 0.18),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-
     .logo-img {
-        width: 65px;
-        height: 65px;
+        width: 55px;
+        height: 55px;
         filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
     }
 
@@ -2061,8 +1958,8 @@ body {
     }
 
     .logo-img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         margin: 0 auto 16px;
         display: block;
