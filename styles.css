@@ -1148,7 +1148,7 @@ body {
 }
 
 .contact-item p {
-    color: #666;
+    color: #9d9999;
     margin: 0;
 }
 
@@ -1677,6 +1677,7 @@ body {
 
     .hero-title {
         font-size: 2.5rem;
+        margin-top: 8rem;
     }
 
     .hero-visual {
@@ -1783,6 +1784,32 @@ body {
 
     .carousel-fade {
         width: 60px;
+        display: none;
+    }
+
+    /* Mobile fade edges that move with content */
+    .products-carousel {
+        position: relative;
+    }
+    .products-carousel::before,
+    .products-carousel::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .products-carousel::before {
+        left: 0;
+        background: linear-gradient(to right, 
+            #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
+    }
+    .products-carousel::after {
+        right: 0;
+        background: linear-gradient(to left, 
+            #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
     }
 
     .product-card {
@@ -1867,13 +1894,10 @@ body {
         text-align: center;
     }
 
-    /* Optimize animations for mobile */
+    /* Keep auto-scroll moving on mobile (fast and smooth) */
     .products-carousel {
-        animation: none !important;
-    }
-
-    .carousel-track {
-        animation: none !important;
+        animation: scrollRight 35s linear infinite !important;
+        will-change: transform;
     }
 
     .testimonials-carousel {
@@ -1901,6 +1925,7 @@ body {
 
     .hero-title {
         font-size: 2rem;
+        margin-top: 8rem;
     }
 
     .hero-description {
