@@ -1770,6 +1770,15 @@ body {
     .carousel-container {
         margin: 40px 0;
         padding: 30px 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    /* Hide scrollbar on mobile for a cleaner look */
+    .carousel-container::-webkit-scrollbar {
+        display: none;
     }
 
     .carousel-fade {
@@ -1809,6 +1818,12 @@ body {
     .product-card:hover .logo-img {
         transform: scale(1.05);
         filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Prevent press zoom on mobile */
+    .product-card:active .product-image,
+    .product-card:active .logo-img {
+        transform: none !important;
     }
 
     .product-content h3 {
@@ -1854,7 +1869,11 @@ body {
 
     /* Optimize animations for mobile */
     .products-carousel {
-        animation-duration: 40s;
+        animation: none !important;
+    }
+
+    .carousel-track {
+        animation: none !important;
     }
 
     .testimonials-carousel {
