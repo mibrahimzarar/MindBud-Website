@@ -91,10 +91,11 @@ class ModernCarousel {
                 const maxLeft = contentWidth - scrollWrap.clientWidth;
                 const sl = scrollWrap.scrollLeft;
                 const epsilon = Math.max(halfWidth * 0.05, 16); // 5% or at least 16px for mobile
+                // Smoothly wrap instead of jumping
                 if (sl <= epsilon) {
-                    scrollWrap.scrollLeft = sl + halfWidth;
+                    scrollWrap.scrollTo({ left: sl + halfWidth, behavior: 'smooth' });
                 } else if (sl >= maxLeft - epsilon) {
-                    scrollWrap.scrollLeft = sl - halfWidth;
+                    scrollWrap.scrollTo({ left: sl - halfWidth, behavior: 'smooth' });
                 }
             };
 
