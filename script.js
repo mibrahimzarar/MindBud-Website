@@ -87,11 +87,10 @@ class ModernCarousel {
             // Infinite manual scroll loop logic on inner wrapper
             const loopScrollIfNeeded = () => {
                 const contentWidth = carousel.scrollWidth;
-                const halfWidth = contentWidth / 2; // width of original set before cloning
+                const halfWidth = contentWidth / 2;
                 const maxLeft = contentWidth - scrollWrap.clientWidth;
                 const sl = scrollWrap.scrollLeft;
-                const epsilon = 1; // threshold for boundary checks
-                // Wrap to middle band to keep seamless infinite scroll
+                const epsilon = Math.max(halfWidth * 0.05, 16); // 5% or at least 16px for mobile
                 if (sl <= epsilon) {
                     scrollWrap.scrollLeft = sl + halfWidth;
                 } else if (sl >= maxLeft - epsilon) {

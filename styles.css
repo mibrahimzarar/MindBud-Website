@@ -1846,12 +1846,13 @@ body {
 
     /* Carousel Responsive Styles */
     .carousel-scroll {
-        margin: 40px 0;
-        padding: 30px 0;
+        margin: 20px 0;
+        padding: 10px 0;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: none;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        max-width: 95vw;
     }
 
     /* Hide scrollbar on mobile for a cleaner look */
@@ -1865,7 +1866,7 @@ body {
     }
 
     .carousel-fade {
-        width: 60px;
+        width: 40px;
         display: none;
     }
 
@@ -1877,6 +1878,8 @@ body {
     /* Mobile fade edges that move with content */
     .products-carousel {
         position: relative;
+        max-width: 98vw;
+        margin: 0 auto;
     }
     .products-carousel::before,
     .products-carousel::after {
@@ -1884,7 +1887,7 @@ body {
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 40px;
+        width: 30px;
         z-index: 2;
         pointer-events: none;
     }
@@ -1900,81 +1903,66 @@ body {
     }
 
     .product-card {
-        min-width: 300px;
-        max-width: 300px;
-        margin: 15px 0;
-        padding: 30px 25px;
+        min-width: 260px;
+        max-width: 260px;
+        margin: 10px 0;
+        padding: 20px 10px;
         background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
         border: 1px solid rgba(148, 163, 184, 0.15);
         box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.3),
+            0 8px 25px rgba(0, 0, 0, 0.3),
             0 0 0 1px rgba(96, 165, 250, 0.1),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     /* Modern Logo Container - Mobile Responsive */
     .product-image {
-        width: 140px;
-        height: 110px;
-        margin: 0 auto 2rem;
+        width: 110px;
+        height: 90px;
+        margin: 0 auto 1rem;
     }
 
     .logo-img {
-        width: 60px;
-        height: 60px;
-        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+        width: 50px;
+        height: 50px;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
     }
 
     .product-card:hover .product-image {
-        transform: translateY(-6px);
+        transform: translateY(-4px);
     }
 
     .product-card:hover .logo-img {
-        transform: scale(1.05);
-        filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.3));
-    }
-
-    /* Prevent press zoom on mobile */
-    .product-card:active .product-image,
-    .product-card:active .logo-img {
-        transform: none !important;
+        transform: scale(1.03);
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
     }
 
     .product-content h3 {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
     }
 
     .product-content p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.5;
     }
 
-    .logo-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin: 0 auto 20px;
-        display: block;
-        object-fit: cover;
-    }
-
     .testimonial-card {
-        min-width: 320px;
-        max-width: 320px;
-        margin: 15px 0;
-        padding: 25px;
+        min-width: 220px;
+        max-width: 220px;
+        margin: 8px 0;
+        padding: 12px;
     }
 
     .testimonial-content {
-        font-size: 1rem;
-        margin-bottom: 25px;
+        font-size: 0.9rem;
+        margin-bottom: 18px;
     }
 
     .testimonial-author {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
+        gap: 10px;
     }
 
     .author-info {
@@ -1989,6 +1977,13 @@ body {
 
     .testimonials-carousel {
         animation-duration: 50s;
+    }
+
+    /* Lower the Our Products heading on mobile */
+    .products-section .section-title {
+        margin-top: 30px;
+        margin-bottom: 18px;
+        font-size: 1.5rem;
     }
 }
 
