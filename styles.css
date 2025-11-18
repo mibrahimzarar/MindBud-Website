@@ -694,7 +694,6 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
 }
 
 /* Hide scrollbar for a cleaner look on inner wrapper */
@@ -709,6 +708,11 @@ body {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     position: relative; /* allow scrolling fades to attach to track */
+}
+
+/* Force-paused state for animation, used during user interaction */
+.carousel-track.is-paused {
+    animation-play-state: paused !important;
 }
 
 /* Products Carousel - Scrolls Right */
@@ -1853,6 +1857,11 @@ body {
     /* Hide scrollbar on mobile for a cleaner look */
     .carousel-scroll::-webkit-scrollbar {
         display: none;
+    }
+
+    /* Disable snapping on mobile to keep infinite scroll seamless */
+    .carousel-scroll {
+        scroll-snap-type: none;
     }
 
     .carousel-fade {

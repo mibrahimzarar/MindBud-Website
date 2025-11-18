@@ -71,6 +71,7 @@ class ModernCarousel {
                 // Cancel any pending resume to prevent premature animation restart
                 clearTimeout(resumeTimeout);
                 setInteracting(true);
+                carousel.classList.add('is-paused');
                 carousel.style.animationPlayState = 'paused';
             };
 
@@ -78,6 +79,7 @@ class ModernCarousel {
                 clearTimeout(resumeTimeout);
                 resumeTimeout = setTimeout(() => {
                     setInteracting(false);
+                    carousel.classList.remove('is-paused');
                     carousel.style.animationPlayState = 'running';
                 }, delay);
             };
