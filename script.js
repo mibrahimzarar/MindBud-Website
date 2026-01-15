@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Enhanced Carousel Functionality
+// Enhanced Carousel Functionality - Manual Scroll Only
 class ModernCarousel {
     constructor() {
         this.carousels = document.querySelectorAll('.carousel-track');
@@ -19,290 +19,72 @@ class ModernCarousel {
         this.carousels.forEach(carousel => {
             this.setupCarousel(carousel);
         });
-        
-        // Performance optimization
-        this.setupIntersectionObserver();
-        this.setupResizeHandler();
     }
 
     setupCarousel(carousel) {
-        const cards = carousel.querySelectorAll('.product-card, .testimonial-card');
-        
-        // Clone cards for seamless infinite scroll
-        cards.forEach(card => {
-            const clone = card.cloneNode(true);
-            carousel.appendChild(clone);
-        });
-
-        // Add smooth pause/resume on hover
-        carousel.addEventListener('mouseenter', () => {
-            carousel.style.animationPlayState = 'paused';
-        });
-
-        carousel.addEventListener('mouseleave', () => {
-            carousel.style.animationPlayState = 'running';
-        });
-
         // Ensure inner scroll wrapper exists and contains the track
         const container = carousel.closest('.carousel-container');
         let scrollWrap = container.querySelector('.carousel-scroll');
         if (!scrollWrap) {
             scrollWrap = document.createElement('div');
             scrollWrap.className = 'carousel-scroll';
-            // insert as first child and move track inside
             container.insertBefore(scrollWrap, container.firstChild);
             scrollWrap.appendChild(carousel);
         } else if (carousel.parentElement !== scrollWrap) {
             scrollWrap.appendChild(carousel);
         }
 
-        // Add touch/swipe support for mobile (use inner scroll wrapper as target)
-        this.addTouchSupport(carousel, scrollWrap);
-
-        // Pause animation when user manually scrolls the container and resume after
-        if (container && scrollWrap) {
-            let resumeTimeout;
-
-            const setInteracting = (isInteracting) => {
-                carousel.dataset.userInteracting = isInteracting ? 'true' : 'false';
-            };
-
-            const pause = () => {
-                // Cancel any pending resume to prevent premature animation restart
-                clearTimeout(resumeTimeout);
-                setInteracting(true);
-                carousel.classList.add('is-paused');
-                carousel.style.animationPlayState = 'paused';
-            };
-
-            const scheduleResume = (delay = 400) => {
-                clearTimeout(resumeTimeout);
-                resumeTimeout = setTimeout(() => {
-                    setInteracting(false);
-                    carousel.classList.remove('is-paused');
-                    carousel.style.animationPlayState = 'running';
-                }, delay);
-            };
-
-            // Infinite manual scroll loop logic on inner wrapper
-            const loopScrollIfNeeded = () => {
-                const contentWidth = carousel.scrollWidth;
-                const halfWidth = contentWidth / 2;
-                const maxLeft = contentWidth - scrollWrap.clientWidth;
-                const sl = scrollWrap.scrollLeft;
-                const epsilon = Math.max(halfWidth * 0.05, 16); // 5% or at least 16px for mobile
-                // Smoothly wrap instead of jumping
-                if (sl <= epsilon) {
-                    scrollWrap.scrollTo({ left: sl + halfWidth, behavior: 'smooth' });
-                } else if (sl >= maxLeft - epsilon) {
-                    scrollWrap.scrollTo({ left: sl - halfWidth, behavior: 'smooth' });
-                }
-            };
-
-            // Initialize starting position to middle for seamless left/right scroll
-            requestAnimationFrame(() => {
-                const halfWidth = carousel.scrollWidth / 2;
-                if (halfWidth > 0) {
-                    scrollWrap.scrollLeft = halfWidth;
-                }
-            });
-
-            // Scroll-based pause/resume (horizontal scroll on inner wrapper)
-            scrollWrap.addEventListener('scroll', () => {
-                pause();
-                loopScrollIfNeeded();
-                // Debounced resume after scrolling settles
-                scheduleResume(500);
-            }, { passive: true });
-
-            // Ensure continuous pausing while finger moves (mobile)
-            scrollWrap.addEventListener('touchmove', () => {
-                pause();
-                loopScrollIfNeeded();
-            }, { passive: true });
-
-            // Touch interactions on container
-            scrollWrap.addEventListener('touchstart', () => {
-                pause();
-            }, { passive: true });
-
-            scrollWrap.addEventListener('touchend', () => {
-                // Allow momentum to finish before resuming
-                scheduleResume(600);
-            }, { passive: true });
-
-            // Pointer interactions (mouse or touch)
-            scrollWrap.addEventListener('pointerdown', () => {
-                pause();
-            });
-            scrollWrap.addEventListener('pointerup', () => {
-                scheduleResume(400);
-            });
-
-            // Trackpad/mouse wheel horizontal scroll
-            scrollWrap.addEventListener('wheel', (e) => {
-                // Pause only when horizontal scroll happens
-                if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                    pause();
-                    loopScrollIfNeeded();
-                    scheduleResume(600);
-                }
-            }, { passive: true });
-
-            // Create elegant desktop scroll buttons (attach to static container)
-            const existingLeft = container.querySelector('.carousel-btn.left');
-            const existingRight = container.querySelector('.carousel-btn.right');
-            if (!existingLeft && !existingRight) {
-                const leftBtn = document.createElement('button');
-                leftBtn.className = 'carousel-btn left';
-                leftBtn.setAttribute('aria-label', 'Scroll left');
-                leftBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-
-                const rightBtn = document.createElement('button');
-                rightBtn.className = 'carousel-btn right';
-                rightBtn.setAttribute('aria-label', 'Scroll right');
-                rightBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-
-                container.appendChild(leftBtn);
-                container.appendChild(rightBtn);
-
-                const scrollAmount = 380; // approx one card width
-                let holdInterval;
-
-                const startHoldScroll = (direction) => {
-                    pause();
-                    clearInterval(holdInterval);
-                    holdInterval = setInterval(() => {
-                        scrollWrap.scrollBy({ left: direction * 20, behavior: 'smooth' });
-                        loopScrollIfNeeded();
-                    }, 16); // ~60fps small increments
-                };
-
-                const stopHoldScroll = () => {
-                    clearInterval(holdInterval);
-                    scheduleResume(250);
-                };
-
-                leftBtn.addEventListener('click', () => {
-                    pause();
-                    scrollWrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                    loopScrollIfNeeded();
-                    scheduleResume(350);
-                });
-
-                rightBtn.addEventListener('click', () => {
-                    pause();
-                    scrollWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                    loopScrollIfNeeded();
-                    scheduleResume(350);
-                });
-
-                // Press-and-hold for continuous scroll
-                leftBtn.addEventListener('pointerdown', () => startHoldScroll(-1));
-                rightBtn.addEventListener('pointerdown', () => startHoldScroll(1));
-                ['pointerup','pointerleave'].forEach(evt => {
-                    leftBtn.addEventListener(evt, stopHoldScroll);
-                    rightBtn.addEventListener(evt, stopHoldScroll);
-                });
-            }
-        }
+        // Create elegant desktop scroll buttons
+        this.createScrollButtons(container, scrollWrap);
     }
 
-    addTouchSupport(carousel, scrollWrap) {
-        let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
-
-        const target = scrollWrap || carousel;
-
-        target.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            carousel.style.animationPlayState = 'paused';
-        }, { passive: true });
-
-        target.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            
-            currentX = e.touches[0].clientX;
-            const deltaX = currentX - startX;
-            
-            // Add subtle resistance effect
-            carousel.style.transform = `translateX(${deltaX * 0.5}px)`;
-        }, { passive: true });
-
-        target.addEventListener('touchend', () => {
-            if (!isDragging) return;
-            
-            isDragging = false;
-            carousel.style.transform = '';
-            // Resume is handled externally by scroll/touch end handlers
-        }, { passive: true });
-    }
-
-    setupIntersectionObserver() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const carousel = entry.target;
-                const userInteracting = carousel.dataset.userInteracting === 'true';
-                if (entry.isIntersecting) {
-                    // Only resume if user is not interacting
-                    if (!userInteracting) {
-                        carousel.style.animationPlayState = 'running';
-                    }
-                } else {
-                    // Pause animation when not visible for performance
-                    carousel.style.animationPlayState = 'paused';
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        this.carousels.forEach(carousel => {
-            observer.observe(carousel);
-        });
-    }
-
-    setupResizeHandler() {
-        let resizeTimeout;
+    createScrollButtons(container, scrollWrap) {
+        const existingLeft = container.querySelector('.carousel-btn.left');
+        const existingRight = container.querySelector('.carousel-btn.right');
         
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.adjustCarouselSpeeds();
-            }, 250);
-        });
-    }
+        if (existingLeft || existingRight) return;
 
-    adjustCarouselSpeeds() {
-        const screenWidth = window.innerWidth;
-        
-        this.carousels.forEach(carousel => {
-            const isProducts = carousel.classList.contains('products-carousel');
-            const isTestimonials = carousel.classList.contains('testimonials-carousel');
-            
-            // Adjust animation duration based on screen size
-            if (screenWidth < 768) {
-                if (isProducts) {
-                    carousel.style.animationDuration = '40s';
-                } else if (isTestimonials) {
-                    carousel.style.animationDuration = '50s';
-                }
-            } else if (screenWidth < 1024) {
-                if (isProducts) {
-                    carousel.style.animationDuration = '50s';
-                } else if (isTestimonials) {
-                    carousel.style.animationDuration = '65s';
-                }
-            } else {
-                // Reset to default speeds for larger screens
-                if (isProducts) {
-                    carousel.style.animationDuration = '60s';
-                } else if (isTestimonials) {
-                    carousel.style.animationDuration = '80s';
-                }
-            }
+        const leftBtn = document.createElement('button');
+        leftBtn.className = 'carousel-btn left';
+        leftBtn.setAttribute('aria-label', 'Scroll left');
+        leftBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+
+        const rightBtn = document.createElement('button');
+        rightBtn.className = 'carousel-btn right';
+        rightBtn.setAttribute('aria-label', 'Scroll right');
+        rightBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+
+        container.appendChild(leftBtn);
+        container.appendChild(rightBtn);
+
+        const scrollAmount = 400; // Slightly more than one card width
+        let holdInterval;
+
+        const startHoldScroll = (direction) => {
+            clearInterval(holdInterval);
+            holdInterval = setInterval(() => {
+                scrollWrap.scrollBy({ left: direction * 25, behavior: 'smooth' });
+            }, 16);
+        };
+
+        const stopHoldScroll = () => {
+            clearInterval(holdInterval);
+        };
+
+        leftBtn.addEventListener('click', () => {
+            scrollWrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        rightBtn.addEventListener('click', () => {
+            scrollWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        // Press-and-hold for continuous scroll
+        leftBtn.addEventListener('pointerdown', () => startHoldScroll(-1));
+        rightBtn.addEventListener('pointerdown', () => startHoldScroll(1));
+        ['pointerup', 'pointerleave'].forEach(evt => {
+            leftBtn.addEventListener(evt, stopHoldScroll);
+            rightBtn.addEventListener(evt, stopHoldScroll);
         });
     }
 }

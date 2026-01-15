@@ -38,7 +38,7 @@ body {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 20px;
-    box-shadow: 
+    box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(96, 165, 250, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -99,7 +99,7 @@ body {
     background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(139, 92, 246, 0.1));
     border: 2px solid rgba(96, 165, 250, 0.3);
     padding: 4px;
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(96, 165, 250, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -107,7 +107,7 @@ body {
 .nav-logo:hover .logo-image {
     transform: scale(1.1) rotate(5deg);
     border-color: rgba(96, 165, 250, 0.6);
-    box-shadow: 
+    box-shadow:
         0 6px 20px rgba(96, 165, 250, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
         0 0 0 3px rgba(96, 165, 250, 0.1);
@@ -158,7 +158,7 @@ body {
     color: #60a5fa;
     transform: translateY(-2px);
     border-color: rgba(96, 165, 250, 0.3);
-    box-shadow: 
+    box-shadow:
         0 4px 20px rgba(96, 165, 250, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -233,8 +233,8 @@ body {
     right: 0;
     bottom: 0;
     background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
     opacity: 1;
 }
 
@@ -355,7 +355,7 @@ body {
     gap: 0.8rem;
     color: #f1f5f9;
     animation: elegantFloat 12s ease-in-out infinite;
-    box-shadow: 
+    box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.4),
         0 0 0 1px rgba(96, 165, 250, 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -380,7 +380,7 @@ body {
 
 .floating-card:hover {
     transform: translateY(-15px) scale(1.08);
-    box-shadow: 
+    box-shadow:
         0 20px 60px rgba(59, 130, 246, 0.3),
         0 0 0 1px rgba(96, 165, 250, 0.4);
     border-color: rgba(96, 165, 250, 0.5);
@@ -492,7 +492,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
         radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
@@ -543,6 +543,7 @@ body {
     0% {
         box-shadow: 0 0 5px rgba(96, 165, 250, 0.5);
     }
+
     100% {
         box-shadow: 0 0 20px rgba(167, 139, 250, 0.8);
     }
@@ -578,7 +579,7 @@ body {
     -webkit-backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -603,7 +604,7 @@ body {
 .vision-point:hover {
     transform: translateY(-10px) scale(1.02);
     border-color: rgba(96, 165, 250, 0.4);
-    box-shadow: 
+    box-shadow:
         0 20px 40px rgba(96, 165, 250, 0.2),
         0 0 0 1px rgba(96, 165, 250, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -679,7 +680,7 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    overflow: hidden; /* container no longer scrolls; inner wrapper does */
+    overflow: hidden;
     margin: 3rem 0;
     padding: 2.5rem 0;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
@@ -688,120 +689,82 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Inner scroll wrapper */
+/* Inner scroll wrapper - Manual scroll only */
 .carousel-scroll {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
 }
 
-/* Hide scrollbar for a cleaner look on inner wrapper */
-.carousel-scroll::-webkit-scrollbar { display: none; }
-.carousel-scroll { scrollbar-width: none; }
+/* Hide scrollbar for a cleaner look */
+.carousel-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-scroll {
+    scrollbar-width: none;
+}
 
 .carousel-track {
     display: flex;
     gap: 2rem;
     width: max-content;
-    padding: 20px 0;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    position: relative; /* allow scrolling fades to attach to track */
+    padding: 20px 60px;
+    /* Add horizontal padding for start/end spacing */
+    position: relative;
 }
 
-/* Force-paused state for animation, used during user interaction */
-.carousel-track.is-paused {
-    animation-play-state: paused !important;
-}
-
-/* Products Carousel - Scrolls Right */
-.products-carousel {
-    animation: scrollRight 60s linear infinite;
-}
-
-/* Testimonials Carousel - Scrolls Left */
+/* Products and Testimonials Carousel - Manual scroll only, no auto-animation */
+.products-carousel,
 .testimonials-carousel {
-    animation: scrollLeft 80s linear infinite;
+    /* Carousel cards are scrolled manually - no animation applied */
+    animation: none;
 }
 
-@keyframes scrollRight {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+/* Product cards snap to center for elegant scrolling */
+.product-card,
+.testimonial-card {
+    scroll-snap-align: center;
 }
 
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(-50%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-/* Pause animation on hover */
-.carousel-track:hover {
-    animation-play-state: paused;
-}
-
-/* Fade edges */
+/* Fade edges - Subtle gradient for visual elegance */
 .carousel-fade {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 100px;
+    width: 60px;
     z-index: 2;
     pointer-events: none;
 }
 
 .carousel-fade-left {
     left: 0;
-    background: linear-gradient(to right, 
-        #0f172a 0%, 
-        rgba(15, 23, 42, 0.8) 30%, 
-        rgba(15, 23, 42, 0) 100%);
+    background: linear-gradient(to right,
+            #0f172a 0%,
+            rgba(15, 23, 42, 0.6) 40%,
+            rgba(15, 23, 42, 0) 100%);
 }
 
 .carousel-fade-right {
     right: 0;
-    background: linear-gradient(to left, 
-        #0f172a 0%, 
-        rgba(15, 23, 42, 0.8) 30%, 
-        rgba(15, 23, 42, 0) 100%);
+    background: linear-gradient(to left,
+            #0f172a 0%,
+            rgba(15, 23, 42, 0.6) 40%,
+            rgba(15, 23, 42, 0) 100%);
 }
 
-/* Make fades scroll with content (desktop & mobile) */
-.carousel-track::before,
-.carousel-track::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    z-index: 2;
-    pointer-events: none;
-}
-.carousel-track::before {
-    left: 0;
-    background: linear-gradient(to right,
-        #0f172a 0%,
-        rgba(15, 23, 42, 0.8) 35%,
-        rgba(15, 23, 42, 0) 100%);
-}
-.carousel-track::after {
-    right: 0;
-    background: linear-gradient(to left,
-        #0f172a 0%,
-        rgba(15, 23, 42, 0.8) 35%,
-        rgba(15, 23, 42, 0) 100%);
+/* Show fade overlays */
+.carousel-fade {
+    display: block;
 }
 
 /* Hide old fixed fades when track fades are active */
-.carousel-fade { display: none; }
+.carousel-fade {
+    display: none;
+}
 
 /* Elegant Scroll Buttons (Desktop) */
 .carousel-btn {
@@ -823,15 +786,25 @@ body {
     cursor: pointer;
     transition: all 0.25s ease;
 }
+
 .carousel-btn:hover {
     background: rgba(255, 255, 255, 0.14);
     color: #ffffff;
     transform: translateY(-50%) scale(1.05);
     box-shadow: 0 12px 32px rgba(59, 130, 246, 0.25);
 }
-.carousel-btn.left { left: 14px; }
-.carousel-btn.right { right: 14px; }
-.carousel-btn i { font-size: 16px; }
+
+.carousel-btn.left {
+    left: 14px;
+}
+
+.carousel-btn.right {
+    right: 14px;
+}
+
+.carousel-btn i {
+    font-size: 16px;
+}
 
 /* Product Card Styles */
 .product-card {
@@ -839,7 +812,7 @@ body {
     border-radius: 24px;
     padding: 3rem 2rem;
     text-align: center;
-    box-shadow: 
+    box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         0 2px 8px rgba(0, 0, 0, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -860,10 +833,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(96, 165, 250, 0.05) 0%, 
-        rgba(167, 139, 250, 0.05) 50%, 
-        rgba(34, 197, 94, 0.05) 100%);
+    background: linear-gradient(135deg,
+            rgba(96, 165, 250, 0.05) 0%,
+            rgba(167, 139, 250, 0.05) 50%,
+            rgba(34, 197, 94, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
@@ -875,7 +848,7 @@ body {
 
 .product-card:hover {
     transform: translateY(-12px);
-    box-shadow: 
+    box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.15),
         0 8px 24px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -956,10 +929,10 @@ body {
     transform: translateX(-50%);
     width: 40px;
     height: 2px;
-    background: linear-gradient(90deg, 
-        rgba(96, 165, 250, 0.8) 0%, 
-        rgba(167, 139, 250, 0.8) 50%, 
-        rgba(34, 197, 94, 0.8) 100%);
+    background: linear-gradient(90deg,
+            rgba(96, 165, 250, 0.8) 0%,
+            rgba(167, 139, 250, 0.8) 50%,
+            rgba(34, 197, 94, 0.8) 100%);
     border-radius: 1px;
     transition: all 0.3s ease;
 }
@@ -997,11 +970,11 @@ body {
     transform: translate(-50%, -50%);
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, 
-        rgba(96, 165, 250, 0.15) 0%, 
-        rgba(167, 139, 250, 0.1) 30%, 
-        rgba(34, 197, 94, 0.05) 60%, 
-        transparent 100%);
+    background: radial-gradient(circle,
+            rgba(96, 165, 250, 0.15) 0%,
+            rgba(167, 139, 250, 0.1) 30%,
+            rgba(34, 197, 94, 0.05) 60%,
+            transparent 100%);
     border-radius: 50%;
     opacity: 0;
     transition: all 0.6s ease;
@@ -1306,7 +1279,7 @@ body {
     background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(139, 92, 246, 0.1));
     border: 2px solid rgba(96, 165, 250, 0.2);
     padding: 3px;
-    box-shadow: 
+    box-shadow:
         0 3px 10px rgba(96, 165, 250, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -1314,7 +1287,7 @@ body {
 .footer-logo:hover .footer-logo-image {
     transform: scale(1.1) rotate(3deg);
     border-color: rgba(96, 165, 250, 0.4);
-    box-shadow: 
+    box-shadow:
         0 5px 15px rgba(96, 165, 250, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.15),
         0 0 0 2px rgba(96, 165, 250, 0.1);
@@ -1371,6 +1344,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1382,6 +1356,7 @@ body {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -1389,42 +1364,59 @@ body {
 }
 
 @keyframes elegantFloat {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px) translateX(0px) rotate(0deg);
     }
+
     25% {
         transform: translateY(-15px) translateX(5px) rotate(1deg);
     }
+
     50% {
         transform: translateY(-25px) translateX(0px) rotate(0deg);
     }
+
     75% {
         transform: translateY(-15px) translateX(-5px) rotate(-1deg);
     }
 }
 
 @keyframes elegantFloatCentered {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateX(-50%) translateY(0px) rotate(0deg);
     }
+
     25% {
         transform: translateX(-50%) translateY(-15px) rotate(1deg);
     }
+
     50% {
         transform: translateX(-50%) translateY(-25px) rotate(0deg);
     }
+
     75% {
         transform: translateX(-50%) translateY(-15px) rotate(-1deg);
     }
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
         transform: translateY(-10px);
     }
+
     60% {
         transform: translateY(-5px);
     }
@@ -1475,7 +1467,7 @@ body {
     overflow: hidden;
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    box-shadow: 
+    box-shadow:
         0 25px 50px rgba(0, 0, 0, 0.5),
         0 0 0 1px rgba(96, 165, 250, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -1536,7 +1528,7 @@ body {
     border: 3px solid rgba(96, 165, 250, 0.3);
     border-radius: 50%;
     padding: 15px;
-    box-shadow: 
+    box-shadow:
         0 20px 40px rgba(96, 165, 250, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 0 0 1px rgba(96, 165, 250, 0.1);
@@ -1545,13 +1537,14 @@ body {
 
 @keyframes logoGlow {
     0% {
-        box-shadow: 
+        box-shadow:
             0 20px 40px rgba(96, 165, 250, 0.2),
             inset 0 1px 0 rgba(255, 255, 255, 0.1),
             0 0 0 1px rgba(96, 165, 250, 0.1);
     }
+
     100% {
-        box-shadow: 
+        box-shadow:
             0 25px 50px rgba(96, 165, 250, 0.4),
             inset 0 1px 0 rgba(255, 255, 255, 0.2),
             0 0 0 3px rgba(96, 165, 250, 0.2),
@@ -1589,6 +1582,7 @@ body {
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
+
     100% {
         background: linear-gradient(135deg, #a78bfa, #60a5fa);
         -webkit-background-clip: text;
@@ -1602,10 +1596,12 @@ body {
         transform: scale(0.5) rotate(-180deg);
         opacity: 0;
     }
+
     50% {
         transform: scale(1.1) rotate(-90deg);
         opacity: 0.8;
     }
+
     100% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
@@ -1617,6 +1613,7 @@ body {
         transform: translateY(30px);
         opacity: 0;
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
@@ -1692,28 +1689,28 @@ body {
         width: calc(100% - 20px);
         border-radius: 16px;
     }
-    
+
     .nav-container {
         padding: 0 20px;
         height: 60px;
     }
-    
+
     .nav-logo {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
     }
-    
+
     .logo-image {
         width: 35px;
         height: 35px;
     }
-    
+
     .logo-text {
         font-size: 1rem;
     }
-    
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -1726,7 +1723,7 @@ body {
         left: 20px;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 
+        box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.4),
             0 0 0 1px rgba(96, 165, 250, 0.2),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -1882,6 +1879,7 @@ body {
         margin: 0 auto;
         padding: 0;
     }
+
     .products-carousel::before,
     .products-carousel::after {
         content: '';
@@ -1892,15 +1890,17 @@ body {
         z-index: 2;
         pointer-events: none;
     }
+
     .products-carousel::before {
         left: 0;
-        background: linear-gradient(to right, 
-            #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
+        background: linear-gradient(to right,
+                #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
     }
+
     .products-carousel::after {
         right: 0;
-        background: linear-gradient(to left, 
-            #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
+        background: linear-gradient(to left,
+                #0f172a 0%, rgba(15, 23, 42, 0.8) 30%, rgba(15, 23, 42, 0) 100%);
     }
 
     .product-card {
@@ -1910,7 +1910,7 @@ body {
         padding: 16px 8px;
         background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
         border: 1px solid rgba(148, 163, 184, 0.15);
-        box-shadow: 
+        box-shadow:
             0 6px 18px rgba(0, 0, 0, 0.25),
             0 0 0 1px rgba(96, 165, 250, 0.1),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -1972,14 +1972,15 @@ body {
         text-align: center;
     }
 
-    /* Speed up auto-scroll on mobile */
-    .products-carousel {
-        animation: scrollRight 4s linear infinite !important;
-        will-change: transform;
+    /* Carousel is manual scroll - no animation needed */
+    .products-carousel,
+    .testimonials-carousel {
+        animation: none !important;
     }
 
-    .testimonials-carousel {
-        animation-duration: 35s;
+    /* Carousel track: add more padding on mobile for better start/end spacing */
+    .carousel-track {
+        padding: 15px 40px;
     }
 
     /* Lower the Our Products heading on mobile */
@@ -1994,16 +1995,16 @@ body {
     .container {
         padding: 0 15px;
     }
-    
+
     .nav-logo {
         gap: 6px;
     }
-    
+
     .logo-image {
         width: 30px;
         height: 30px;
     }
-    
+
     .logo-text {
         font-size: 0.9rem;
     }
@@ -2033,7 +2034,7 @@ body {
         padding: 35px 25px;
         background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
         border: 1px solid rgba(148, 163, 184, 0.15);
-        box-shadow: 
+        box-shadow:
             0 8px 25px rgba(0, 0, 0, 0.3),
             0 0 0 1px rgba(96, 165, 250, 0.1),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -2094,7 +2095,7 @@ body {
         display: block;
         object-fit: contain;
         border: 2px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 
+        box-shadow:
             0 4px 16px rgba(0, 0, 0, 0.1),
             0 1px 4px rgba(0, 0, 0, 0.05);
     }
